@@ -34,7 +34,7 @@ export class MessengerService {
     recipientId: string,
     message: string,
   ): Promise<void> {
-    const url = `https://graph.facebook.com/v18.0/me/messages`;
+    const url = `https://graph.facebook.com/v21.0/me/messages`;
 
     try {
       await axios.post(
