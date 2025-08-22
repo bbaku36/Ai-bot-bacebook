@@ -12,7 +12,7 @@ export class AiService {
     this.chatModel = new ChatOpenAI({
       openAIApiKey: this.configService.get<string>('OPENAI_API_KEY'),
       temperature: 0.7,
-      modelName: 'gpt-4-0125-preview',
+      modelName: 'gpt-4o-mini',
       maxTokens: 1000,
       streaming: false,
       callbacks: [
