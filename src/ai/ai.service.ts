@@ -1,19 +1,19 @@
 import { Injectable, Logger } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
-import { ChatOpenAI } from '@langchain/openai';
+import { ChatGoogleGenerativeAI } from '@langchain/google-genai';
 import { HumanMessage, SystemMessage } from '@langchain/core/messages';
 
 @Injectable()
 export class AiService {
   private readonly logger = new Logger(AiService.name);
-  private readonly chatModel: ChatOpenAI;
+  private readonly chatModel: ChatGoogleGenerativeAI;
 
   constructor(private configService: ConfigService) {
-    this.chatModel = new ChatOpenAI({
-      openAIApiKey: this.configService.get<string>('OPENAI_API_KEY'),
+    this.chatModel = new ChatGoogleGenerativeAI({
+      apiKey: this.configService.get<string>('GOOGLE_API_KEY'),
       temperature: 0.7,
-      modelName: 'gpt-4-0125-preview',
-      maxTokens: 1000,
+      model: 'gemini-1.5-pro-latest',
+      maxOutputTokens: 1000,
       streaming: false,
       callbacks: [
         {
@@ -31,7 +31,6 @@ export class AiService {
           },
         },
       ],
-      timeout: 30000,
       maxRetries: 3,
     });
   }
